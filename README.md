@@ -8,3 +8,7 @@
   - Java
   - SpringBoot
   - MySQL
+  
+# Frontend
+  - Angular
+  - Boostrap
