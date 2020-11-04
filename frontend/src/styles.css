@@ -1,1 +1,53 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --color-dark: #222f3e;
+  --color-secondary: #8395a7;
+  --color-primary: #2e86de;
+  --color-danger: #ee5253;
+  --color-purple: #341f97;
+  --color-purple-secondary: #5f27cd;
+  --color-light: #c8d6e5;
+}
+
+.bg-dark {
+  background-color: var(--color-dark) !important;
+}
+
+.bg-purple {
+  background-color: var(--color-purple);
+}
+
+.btn-outline-purple {
+  border: 1px solid var(--color-purple) !important;
+  color: var(--color-dark) !important;
+}
+
+.btn-outline-purple:hover {
+  background-color: var(--color-purple) !important;
+  color: #fff !important;
+}
+
+.bg-purple-secondary {
+  background-color: var(--color-purple-secondary);
+}
+
+.btn-animate:hover {
+  text-shadow: 0 0 4px var(--color-purple-secondary);
+  border: 2px solid var(--color-purple-secondary);
+  box-shadow: 0 0 8px var(--color-purple-secondary),
+    0 0 24px var(--color-primary);
+  animation: shake 0.4s linear;
+}
+
+@keyframes shake {
+  0% {
+    transform: rotate(0);
+  }
+
+  25% {
+    transform: rotate(10deg);
+  }
+
+  50% {
+    transform: rotate(-10deg);
+  }
+}

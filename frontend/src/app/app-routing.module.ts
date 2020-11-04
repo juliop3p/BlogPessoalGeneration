@@ -1,3 +1,5 @@
+import { CadastroComponent } from './cadastro/cadastro.component';
+import { LoginComponent } from './login/login.component';
 import { FeedComponent } from './feed/feed.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
@@ -16,6 +18,14 @@ const routes: Routes = [
   {
     path: 'feed',
     component: FeedComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'cadastro',
+    component: CadastroComponent,
   },
 ];
 
