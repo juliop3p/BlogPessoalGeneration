@@ -19,6 +19,7 @@
             class="form-control"
             id="usuario"
             placeholder="Seu nome de usuário cadastrado"
+            [(ngModel)]="userLogin.usuario"
           />
         </div>
         <div class="form-group">
@@ -28,10 +29,15 @@
             class="form-control"
             id="exampleInputPassword1"
             placeholder="Senha"
+            [(ngModel)]="userLogin.senha"
           />
         </div>
         <div class="d-flex justify-content-center">
-          <button type="submit" class="btn btn-outline-purple w-25 btn-animate">
+          <button
+            type="submit"
+            class="btn btn-outline-purple w-25 btn-animate"
+            (click)="entrar()"
+          >
             Entrar
           </button>
         </div>
