@@ -15,6 +15,7 @@
           class="form-control"
           id="titulo"
           placeholder="Digite aqui o seu titulo"
+          [(ngModel)]="postagem.titulo"
         />
       </div>
 
@@ -25,6 +26,7 @@
           id="texto"
           rows="3"
           placeholder="Digite aqui o seu texto"
+          [(ngModel)]="postagem.texto"
         ></textarea>
         <small class="text-danger">*Digite no minimo 10 caracteres</small>
       </div>
@@ -36,14 +38,26 @@
               >Escolha um tema ou
               <a routerLink="/cadastro-tema">Cadastre um novo</a>
             </label>
-            <select name="tema" id="tema" class="form-control">
-              <option></option>
+            <select
+              name="tema"
+              id="tema"
+              class="form-control"
+              [(ngModel)]="idTema"
+              (change)="findByIdTema()"
+            >
+              <option *ngFor="let item of listaTemas" value="{{ item.id }}">
+                {{ item.descricao }}
+              </option>
             </select>
           </div>
         </div>
 
         <div class="col-md-6 d-flex justify-content-end">
-          <button type="button" class="btn btn-outline-info w-25">
+          <button
+            type="button"
+            class="btn btn-outline-info w-25"
+            (click)="publicar()"
+          >
             Publicar
           </button>
         </div>
@@ -100,7 +114,53 @@
             </div>
           </div>
         </div>
+        <!--  -->
+        <div class="row">
+          <div class="col-md-12">
+            <div
+              class="card mt-5 mb-5"
+              *ngFor="let item of listaPostagens | orderBy: key:reverse"
+            >
+              <div class="card-header">
+                <div class="row d-flex align-items-center">
+                  <div class="col-md-8">
+                    <h5 class="card-title">{{ item.titulo }}</h5>
+                    <small>Tema: {{ item.tema.descricao }} </small>
+                  </div>
+                  <div class="col-md-4 d-flex justify-content-end">
+                    <button
+                      class="mr-3 btn btn-outline-info"
+                      [routerLink]="['/editar-post', item.id]"
+                    >
+                      Editar
+                    </button>
 
+                    <button
+                      class="btn btn-outline-danger ml-3"
+                      [routerLink]="['/delete-post', item.id]"
+                    >
+                      Apagar
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-body">
+                <p class="card-text" aria-describedby="texto">
+                  {{ item.texto }}
+                </p>
+                <small
+                  id="texto"
+                  class="form-text m-0 text-muted mb-3 text-monospace"
+                >
+                  Postado em {{ item.data | date: "dd/MM/yyyy" }} às
+                  {{ item.data | date: "HH:mm" }}</small
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--  -->
         <div
           class="tab-pane fade"
           id="postagens-temas"

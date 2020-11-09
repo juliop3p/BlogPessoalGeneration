@@ -1,3 +1,4 @@
+import { PostTemaComponent } from './post-tema/post-tema.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { LoginComponent } from './login/login.component';
 import { FeedComponent } from './feed/feed.component';
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'cadastro',
     component: CadastroComponent,
+  },
+  {
+    path: 'cadastro-tema',
+    component: PostTemaComponent,
   },
 ];
 
