@@ -2,6 +2,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TemaService } from './../service/tema.service';
 import { Component, OnInit } from '@angular/core';
 import { Tema } from '../model/Tema';
+import { AlertasService } from '../services/alertas.service';
 
 @Component({
   selector: 'app-put-tema',
@@ -14,7 +15,8 @@ export class PutTemaComponent implements OnInit {
   constructor(
     private temaService: TemaService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private alert: AlertasService
   ) {}
 
   ngOnInit() {
@@ -33,11 +35,14 @@ export class PutTemaComponent implements OnInit {
     if (this.tema.postagem.length != 0) {
       this.router.navigate(['/cadastro-tema']);
     } else if (this.tema.descricao == null || this.tema.descricao == '') {
+      this.alert.showAlertDanger(
+        'Preencha todos os campos corretamente antes de enviar!'
+      );
     } else {
       this.temaService.putTema(this.tema).subscribe((resp: Tema) => {
         this.tema = resp;
         this.router.navigate(['/cadastro-tema']);
-        alert('Tema atualizado com sucesso!');
+        this.alert.showAlertSuccess('Tema atualizado com sucesso!');
       });
     }
   }

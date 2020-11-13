@@ -3,6 +3,7 @@
     <div class="col-md-4">
       <app-perfil-lateral></app-perfil-lateral>
     </div>
+
     <div class="col-md-8">
       <h3 class="text-center mb-4 text-monospace">
         Como tem sido minha experiência na Generation?
@@ -105,62 +106,67 @@
                 type="search"
                 placeholder="Pesquisar postagem"
                 aria-label="Pesquisar"
+                [(ngModel)]="titulo"
               />
             </div>
             <div class="col-md-2 pl-0">
-              <button class="btn btn-outline-warning w-100" type="button">
+              <button
+                class="btn btn-outline-warning w-100"
+                type="button"
+                (click)="findByTituloPostagem()"
+              >
                 Pesquisar
               </button>
             </div>
           </div>
-        </div>
-        <!--  -->
-        <div class="row">
-          <div class="col-md-12">
-            <div
-              class="card mt-5 mb-5"
-              *ngFor="let item of listaPostagens | orderBy: key : reverse"
-            >
-              <div class="card-header">
-                <div class="row d-flex align-items-center">
-                  <div class="col-md-8">
-                    <h5 class="card-title">{{ item.titulo }}</h5>
-                    <small>Tema: {{ item.tema.descricao }} </small>
-                  </div>
-                  <div class="col-md-4 d-flex justify-content-end">
-                    <button
-                      class="mr-3 btn btn-outline-info"
-                      [routerLink]="['/editar-post', item.id]"
-                    >
-                      Editar
-                    </button>
 
-                    <button
-                      class="btn btn-outline-danger ml-3"
-                      [routerLink]="['/delete-post', item.id]"
-                    >
-                      Apagar
-                    </button>
+          <div class="row">
+            <div class="col-md-12">
+              <div
+                class="card mt-5 mb-5"
+                *ngFor="let item of listaPostagens | orderBy: key:reverse"
+              >
+                <div class="card-header">
+                  <div class="row d-flex align-items-center">
+                    <div class="col-md-8">
+                      <h5 class="card-title">{{ item.titulo }}</h5>
+                      <small>Tema: {{ item.tema.descricao }} </small>
+                    </div>
+                    <div class="col-md-4 d-flex justify-content-end">
+                      <button
+                        class="mr-3 btn btn-outline-info"
+                        [routerLink]="['/editar-post', item.id]"
+                      >
+                        Editar
+                      </button>
+
+                      <button
+                        class="btn btn-outline-danger ml-3"
+                        [routerLink]="['/delete-post', item.id]"
+                      >
+                        Apagar
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="card-body">
-                <p class="card-text" aria-describedby="texto">
-                  {{ item.texto }}
-                </p>
-                <small
-                  id="texto"
-                  class="form-text m-0 text-muted mb-3 text-monospace"
-                >
-                  Postado em {{ item.data | date: "dd/MM/yyyy" }} às
-                  {{ item.data | date: "HH:mm" }}</small
-                >
+                <div class="card-body">
+                  <p class="card-text" aria-describedby="texto">
+                    {{ item.texto }}
+                  </p>
+                  <small
+                    id="texto"
+                    class="form-text m-0 text-muted mb-3 text-monospace"
+                  >
+                    Postado em {{ item.data | date: "dd/MM/yyyy" }} às
+                    {{ item.data | date: "HH:mm" }}</small
+                  >
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <!--  -->
+
         <div
           class="tab-pane fade"
           id="postagens-temas"
@@ -174,12 +180,49 @@
                 type="search"
                 placeholder="Pesquisar postagem"
                 aria-label="Pesquisar"
+                [(ngModel)]="nomeTema"
               />
             </div>
             <div class="col-md-2 pl-0">
-              <button class="btn btn-outline-warning w-100" type="button">
+              <button
+                class="btn btn-outline-warning w-100"
+                type="button"
+                (click)="findByNomeTema()"
+              >
                 Pesquisar
               </button>
+            </div>
+          </div>
+
+          <div class="row">
+            <div
+              class="col-md-12"
+              *ngFor="let item of listaTemas | orderBy: key:reverse"
+            >
+              <div *ngFor="let post of item.postagem">
+                <div class="card mt-5 mb-5">
+                  <div class="card-header">
+                    <div class="row d-flex align-items-center">
+                      <div class="col-md-12">
+                        <h5 class="card-title">{{ post.titulo }}</h5>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="card-body">
+                    <p class="card-text" aria-describedby="texto">
+                      {{ post.texto }}
+                    </p>
+                    <small
+                      id="texto"
+                      class="form-text m-0 text-muted mb-3 text-monospace"
+                    >
+                      Postado em {{ post.data | date: "dd/MM/yyyy" }} às
+                      {{ post.data | date: "HH:mm" }}</small
+                    >
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
